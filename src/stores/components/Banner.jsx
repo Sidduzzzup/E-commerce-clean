@@ -8,7 +8,7 @@ const Banner = () => {
       <div style={{ display: 'flex', paddingTop: '20px', paddingLeft: '20px', paddingRight: '30px' }}>
         
         <img
-          src="/71TcXaLwN9L._SX3000_.jpg"
+          src="/assets/71TcXaLwN9L._SX3000_.jpg"
           alt="banner"
           style={{ width: '50%', height: '100%', marginRight: '10px' }}
         />
@@ -23,7 +23,7 @@ const Banner = () => {
       <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px', marginBottom: '0px' }}>
         
         <img
-          src="/1stbanner.JPG"
+          src="/assets/1stbanner.JPG"
           alt="Japan Welcomes You"
           style={{
             width: '70%', // slightly wider for banner feel

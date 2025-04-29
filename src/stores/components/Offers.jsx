@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Offers = () => {
-  const imagePath = '/offers.jpg';  // Define the image path
+  const imagePath = '/assets/offers.jpg';  // Define the image path
   
   //console.log(`Image path: ${imagePath}`);  // Log the image path
 
