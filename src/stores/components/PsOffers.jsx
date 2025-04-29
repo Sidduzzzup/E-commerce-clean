@@ -1,7 +1,7 @@
 import React from 'react'
 
 const PsOffers = () => {
-    const imagePath = '/assets/ps5.jpg';  // Define the image path
+    const imagePath = '/ps5.jpg';  // Define the image path
   
     //console.log(`Image path: ${imagePath}`);  // Log the image path
   return (
