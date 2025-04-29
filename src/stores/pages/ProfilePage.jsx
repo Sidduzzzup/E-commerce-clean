@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './ProfilePage.css';
 import { MdManageAccounts } from "react-icons/md";
+import { API_BASE_URL } from '../../apiConfig';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -30,7 +31,7 @@ const ProfilePage = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:5000/api/auth/me', {
+        const response = await axios.get(`${API_BASE_URL}/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -75,7 +76,7 @@ const ProfilePage = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        'http://localhost:5000/api/auth/update-address',
+        `${API_BASE_URL}/api/auth/update-address`,
         { address },
         { headers: { Authorization: `Bearer ${token}` } }
       );

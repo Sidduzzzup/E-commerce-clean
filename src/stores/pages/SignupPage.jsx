@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Card, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../../apiConfig';
 import './SignupPage.css';
 
 const SignupPage = () => {
@@ -45,7 +46,7 @@ const SignupPage = () => {
       // Remove confirmPassword before sending to API
       const { confirmPassword, ...signupData } = formData;
       
-      const response = await axios.post('http://localhost:5000/api/auth/register', signupData);
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, signupData);
       
       // Store token and user data in localStorage
       localStorage.setItem('token', response.data.token);
