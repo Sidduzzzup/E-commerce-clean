@@ -37,7 +37,7 @@ const Banner = () => {
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '30px' }}>
         <img
-          src="/10385405.jpg"
+          src="/assets/10385405.jpg"
           alt="Japan Welcomes You"
           style={{
             width: '80%', // slightly wider for banner feel

@@ -15,13 +15,11 @@ import Offers from './Offers';
 import PsOffers from './PsOffers';
 import ClothsOffer from './ClothsOffer';
 
-
 const Products = () => {
   return (
     <div className='productss'>
-      <h2> CEO & FOUNDER SIDDARTHA KONE</h2>
-      <Offers />
-      
+      <h3> CEO & FOUNDER SIDDARTHA KONE</h3>
+      <Offers/>
       <TV />
       <Computers />
       <Ac />

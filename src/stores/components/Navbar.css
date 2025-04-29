@@ -23,7 +23,7 @@ body {
 
 /* Ensure the navbar does not overlap content */
 .navbar {
-  background: linear-gradient(to right, rgba(253, 242, 248, 0.9), rgba(244, 243, 255, 0.9));
+  background: linear-gradient( rgba(255, 210, 231, 0.9), rgba(216, 213, 255, 0.9));
   backdrop-filter: blur(8px);
   position: fixed;
   top: 0;
