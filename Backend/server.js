@@ -18,7 +18,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+app.use(cors({
+	origin: ["http://localhost:5173", "https://e-commerce-clean.vercel.app"], // ✅ add deployed site
+	credentials: true, // only if you’re using cookies
+  }));
+  
+
+
 app.use(express.json());
 app.use(cookieParser());
 
