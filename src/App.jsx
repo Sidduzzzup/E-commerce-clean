@@ -39,6 +39,8 @@ import ProfilePage from './stores/pages/ProfilePage';
 import GamesPage from './stores/pages/GamesPage';
 import GameDetail from './stores/pages/GameDetail';
 import TopSalesProducts from './stores/components/TopSalesProducts';
+import Bookpage from './stores/pages/BookPage';
+import BookSingle from './stores/SinglesPages/BookSingle';
 
 const App = () => {
   return (
@@ -56,6 +58,7 @@ const App = () => {
             <Route path="/acs" element={<AcPage />} />
             <Route path="/mob" element={<MobilesPage />} />
             <Route path="/fridge" element={<FridgePage />} />
+            <Route path="/books" element={<Bookpage />} />
             <Route path="/watch" element={<WatchPage />} />
             <Route path="/men" element={<MenPage />} />
             <Route path="/women" element={<WomenPage />} />
@@ -65,6 +68,7 @@ const App = () => {
             <Route path="/games" element={<GamesPage />} />
             <Route path="/games/:id" element={<GameDetail />} />
             <Route path="/top-sales" element={<TopSalesProducts />} />
+            
 
             {/* Auth routes */}
             <Route path="/login" element={<LoginPage />} />
@@ -94,6 +98,7 @@ const App = () => {
             <Route path="/kitchens/:id" element={<KitchenSingle />} />
             <Route path="/speakerss/:id" element={<SpeakerSingle />} />
             <Route path="/furs/:id" element={<FurnitureSingle />} />
+            <Route path="/books/:id" element={<BookSingle />} />
           </Routes>
         </div>
       </CartProvider>

@@ -49,8 +49,9 @@ export const Tvpage = () => {
     },
     img: {
       width: '100%',
-      height: '220px',
-      objectFit: 'cover',
+      height: '320px',
+      padding: '20px',
+      borderRadius: '35px',
     },
     cardContent: {
       padding: '20px',

@@ -1,5 +1,6 @@
 import React from 'react'
 import { booksData } from '../data/books'
+import { Link } from "react-router-dom";
 
 const Books = () => {
   return (
@@ -8,7 +9,7 @@ const Books = () => {
           <div className="proTitle">
             <h2>World of Stories</h2>
           </div>
-
+          <Link to='/books'>
 
           <div  className="proSection">
 
@@ -22,6 +23,7 @@ const Books = () => {
           )})}
 
           </div>
+          </Link>
 
  
           </>

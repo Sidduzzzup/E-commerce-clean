@@ -10,7 +10,7 @@ const Computers = () => {
         <>
          
           <div className="proTitle">
-            <h2>Computers</h2>
+            <h2>Laptops</h2>
           </div>
          
           <Link to='/coms'>
