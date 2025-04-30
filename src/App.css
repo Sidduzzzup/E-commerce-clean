@@ -51,17 +51,30 @@
   padding-left: 150px;
 } */
 
-.proSection{
+.proSection {
   display: flex;
-  /* flex-wrap:wrap; */
-  
+  overflow-x:scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 1rem;
+  gap: 0rem;
+  scroll-behavior: smooth;
+  width: 100%; /* important */
+}
 
+.imgBox {
+  flex: 0 0 auto;
+  width: 200px; /* or any fixed width */
+  height: auto;
 }
-.proImage{
-  height: 200px;
-  width: 200px;
-  
+
+.proImage {
+  width: 100%;
+  height: auto;
+  border-radius: 0px;
+  object-fit: cover;
 }
+
 /* .koreanname {
   padding-top: 0px;
 
@@ -156,6 +169,7 @@
 .productss{
   padding: 30px;
   padding-top: 30px;
+  background-color:whitesmoke;
 }
 .offers{
   height: 350px;

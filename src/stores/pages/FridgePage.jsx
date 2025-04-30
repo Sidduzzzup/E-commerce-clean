@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { fridgeData } from "../data/fridge";
 import Navbarr from '../components/Navbarr';
 import { Link } from 'react-router-dom';
+import FilterSidebar from '../../components/FilterSidebar';
 
 export const FridgePage = () => {
+  const brandOptions = Array.from(new Set(fridgeData.map(item => item.brand)));
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
+  const filteredData = selectedBrands.length === 0
+    ? fridgeData
+    : fridgeData.filter(item => selectedBrands.includes(item.brand));
+
+  const handleBrandChange = (brand) => {
+    setSelectedBrands(prev =>
+      prev.includes(brand)
+        ? prev.filter(b => b !== brand)
+        : [...prev, brand]
+    );
+  };
+  const handleReset = () => setSelectedBrands([]);
+
   const styles = {
     container: {
       backgroundColor: '#0e1015',
@@ -27,11 +44,16 @@ export const FridgePage = () => {
       fontSize: '1.2rem',
       color: '#a8a8a8',
     },
+    layout: {
+      display: 'flex',
+      gap: '40px',
+    },
     grid: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
       gap: '40px',
       padding: '0 20px',
+      flex: 1,
     },
     card: {
       background: 'linear-gradient(145deg, #1b1f2b, #141723)',
@@ -89,34 +111,41 @@ export const FridgePage = () => {
           <h2 style={styles.title}>Explore Refrigerators</h2>
           <p style={styles.subtitle}>Discover energy-efficient fridges from top brands.</p>
         </div>
-
-        <div style={styles.grid}>
-          {fridgeData.map((item) => (
-            <Link
-              key={item.id}
-              to={`/fridges/${item.id}`}
-              style={{ textDecoration: 'none' }}
-            >
-              <div
-                style={styles.card}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = styles.cardHover.transform;
-                  e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = styles.card.boxShadow;
-                }}
+        <div style={styles.layout}>
+          <FilterSidebar
+            options={brandOptions}
+            selectedOptions={selectedBrands}
+            onChange={handleBrandChange}
+            onReset={handleReset}
+          />
+          <div style={styles.grid}>
+            {filteredData.map((item) => (
+              <Link
+                key={item.id}
+                to={`/fridges/${item.id}`}
+                style={{ textDecoration: 'none' }}
               >
-                <img style={styles.img} src={item.image} alt={item.brand} />
-                <div style={styles.cardContent}>
-                  <h3 style={styles.brand}>{item.brand}</h3>
-                  <p style={styles.price}>${item.price}</p>
-                  <div style={styles.button}>View Details</div>
+                <div
+                  style={styles.card}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = styles.cardHover.transform;
+                    e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = styles.card.boxShadow;
+                  }}
+                >
+                  <img style={styles.img} src={item.image} alt={item.brand} />
+                  <div style={styles.cardContent}>
+                    <h3 style={styles.brand}>{item.brand}</h3>
+                    <p style={styles.price}>${item.price}</p>
+                    <div style={styles.button}>View Details</div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </>

@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { computerData } from '../data/computers';
 import Navbarr from '../components/Navbarr';
 import { Link } from 'react-router-dom';
+import FilterSidebar from '../../components/FilterSidebar';
 
 export const ComputersPage = () => {
+  const brandOptions = Array.from(new Set(computerData.map(item => item.company)));
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
+  const filteredData = selectedBrands.length === 0
+    ? computerData
+    : computerData.filter(item => selectedBrands.includes(item.company));
+
+  const handleBrandChange = (brand) => {
+    setSelectedBrands(prev =>
+      prev.includes(brand)
+        ? prev.filter(b => b !== brand)
+        : [...prev, brand]
+    );
+  };
+  const handleReset = () => setSelectedBrands([]);
+
   const styles = {
     container: {
       backgroundColor: '#0f1115',
@@ -27,11 +44,16 @@ export const ComputersPage = () => {
       fontSize: '1.2rem',
       color: '#a8a8a8',
     },
+    layout: {
+      display: 'flex',
+      gap: '40px',
+    },
     grid: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
       gap: '40px',
       padding: '0 20px',
+      flex: 1,
     },
     card: {
       background: 'linear-gradient(145deg, #1f2230, #171924)',
@@ -89,34 +111,42 @@ export const ComputersPage = () => {
           <h2 style={styles.title}>Explore Computers</h2>
           <p style={styles.subtitle}>Upgrade your technology with the best devices.</p>
         </div>
-
-        <div style={styles.grid}>
-          {computerData.map((item) => (
-            <Link
-              key={item.id}
-              to={`/Computers/${item.id}`}
-              style={{ textDecoration: 'none' }}
-            >
-              <div
-                style={styles.card}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = styles.cardHover.transform;
-                  e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = styles.card.boxShadow;
-                }}
+        <div style={styles.layout}>
+          <FilterSidebar
+            options={brandOptions}
+            selectedOptions={selectedBrands}
+            onChange={handleBrandChange}
+            onReset={handleReset}
+          />
+          <div style={styles.grid}>
+            {filteredData.map((item) => (
+              <Link
+                key={item.id}
+                to={`/Computers/${item.id}`}
+                style={{ textDecoration: 'none' }}
               >
-                <img style={styles.img} src={item.image} alt={item.brand} />
-                <div style={styles.cardContent}>
-                  <h3 style={styles.brand}>{item.brand}</h3>
-                  <p style={styles.price}>${item.price}</p>
-                  <div style={styles.button}>View Details</div>
+                <div
+                  style={styles.card}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = styles.cardHover.transform;
+                    e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = styles.card.boxShadow;
+                  }}
+                >
+                  <img style={styles.img} src={item.image} alt={item.brand} />
+                  <div style={styles.cardContent}>
+                    <h3 style={styles.brand}>{item.brand}</h3>
+                    <h3 style={styles.price}>{item.model}</h3>
+                    <p style={styles.price}>${item.price}</p>
+                    <div style={styles.button}>View Details</div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </>

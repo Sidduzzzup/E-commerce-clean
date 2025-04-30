@@ -13,6 +13,7 @@ import { FaShirt } from "react-icons/fa6";
 import { FaGem } from "react-icons/fa6";
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import RussianBanners from './RussianBanners';
 import './RussianNavbar.css';
 
 function RussianNavbar() {
@@ -24,7 +25,7 @@ function RussianNavbar() {
     navigate('/');
   };
 
-  return (
+  return (<>
     <Navbar expand="lg" className="russian-navbar">
       <Container>
         <Navbar.Brand href="/">Сизонский базар</Navbar.Brand>
@@ -99,6 +100,10 @@ function RussianNavbar() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
+
+    <RussianBanners />
+
+    </>
   );
 }
 

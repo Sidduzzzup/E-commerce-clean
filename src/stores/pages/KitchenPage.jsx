@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { kitchenData } from "../data/kitchen";
 import Navbarr from '../components/Navbarr';
 import { Link } from 'react-router-dom';
+import FilterSidebar from '../../components/FilterSidebar';
 
 export const KitchenPage = () => {
+  const brandOptions = Array.from(new Set(kitchenData.map(item => item.brand)));
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
+  const filteredData = selectedBrands.length === 0
+    ? kitchenData
+    : kitchenData.filter(item => selectedBrands.includes(item.brand));
+
+  const handleBrandChange = (brand) => {
+    setSelectedBrands(prev =>
+      prev.includes(brand)
+        ? prev.filter(b => b !== brand)
+        : [...prev, brand]
+    );
+  };
+  const handleReset = () => setSelectedBrands([]);
+
   const styles = {
     container: {
       backgroundColor: '#1a202c',
@@ -22,10 +39,15 @@ export const KitchenPage = () => {
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
     },
+    layout: {
+      display: 'flex',
+      gap: '40px',
+    },
     grid: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
       gap: '40px',
+      flex: 1,
     },
     card: {
       background: '#2d3748',
@@ -68,29 +90,36 @@ export const KitchenPage = () => {
         <div style={styles.header}>
           <h2 style={styles.title}>Electronics Section</h2>
         </div>
-
-        <div style={styles.grid}>
-          {kitchenData.map((item) => (
-            <Link key={item.id} to={`/Kitchens/${item.id}`} style={{ textDecoration: 'none' }}>
-              <div
-                style={styles.card}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = styles.cardHover.transform;
-                  e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = styles.card.boxShadow;
-                }}
-              >
-                <img src={item.image} alt={item.brand} style={styles.image} />
-                <div style={styles.details}>
-                  <div style={styles.brand}>{item.brand}</div>
-                  <div style={styles.price}>₹{item.price}</div>
+        <div style={styles.layout}>
+          <FilterSidebar
+            options={brandOptions}
+            selectedOptions={selectedBrands}
+            onChange={handleBrandChange}
+            onReset={handleReset}
+          />
+          <div style={styles.grid}>
+            {filteredData.map((item) => (
+              <Link key={item.id} to={`/Kitchens/${item.id}`} style={{ textDecoration: 'none' }}>
+                <div
+                  style={styles.card}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = styles.cardHover.transform;
+                    e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = styles.card.boxShadow;
+                  }}
+                >
+                  <img src={item.image} alt={item.brand} style={styles.image} />
+                  <div style={styles.details}>
+                    <div style={styles.brand}>{item.brand}</div>
+                    <div style={styles.price}>₹{item.price}</div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </>

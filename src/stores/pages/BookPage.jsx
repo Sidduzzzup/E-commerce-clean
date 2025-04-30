@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { booksData } from '../data/books';
 import Navbarr from '../components/Navbarr';
 import { Link } from 'react-router-dom';
+import FilterSidebar from '../../components/FilterSidebar';
 
-export const ComputersPage = () => {
+export const BookPage = () => {
+  const authorOptions = Array.from(new Set(booksData.map(item => item.author)));
+  const [selectedAuthors, setSelectedAuthors] = useState([]);
+
+  const filteredData = selectedAuthors.length === 0
+    ? booksData
+    : booksData.filter(item => selectedAuthors.includes(item.author));
+
+  const handleAuthorChange = (author) => {
+    setSelectedAuthors(prev =>
+      prev.includes(author)
+        ? prev.filter(a => a !== author)
+        : [...prev, author]
+    );
+  };
+  const handleReset = () => setSelectedAuthors([]);
+
   const styles = {
     container: {
       backgroundColor: '#0f1115',
@@ -27,11 +44,16 @@ export const ComputersPage = () => {
       fontSize: '1.2rem',
       color: '#a8a8a8',
     },
+    layout: {
+      display: 'flex',
+      gap: '40px',
+    },
     grid: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
       gap: '40px',
       padding: '0 20px',
+      flex: 1,
     },
     card: {
       background: 'linear-gradient(145deg, #1f2230, #171924)',
@@ -88,42 +110,49 @@ export const ComputersPage = () => {
       <Navbarr />
       <div style={styles.container}>
         <div style={styles.header}>
-          <h2 style={styles.title}>Explore Computers</h2>
+          <h2 style={styles.title}>Explore Books</h2>
           <p style={styles.subtitle}>Upgrade your technology with the best devices.</p>
         </div>
-
-        <div style={styles.grid}>
-          {booksData.map((item) => (
-            <Link
-              key={item.id}
-              to={`/books/${item.id}`}
-              style={{ textDecoration: 'none' }}
-            >
-              <div
-                style={styles.card}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.transform = styles.cardHover.transform;
-                  e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = styles.card.boxShadow;
-                }}
+        <div style={styles.layout}>
+          <FilterSidebar
+            options={authorOptions}
+            selectedOptions={selectedAuthors}
+            onChange={handleAuthorChange}
+            onReset={handleReset}
+          />
+          <div style={styles.grid}>
+            {filteredData.map((item) => (
+              <Link
+                key={item.id}
+                to={`/books/${item.id}`}
+                style={{ textDecoration: 'none' }}
               >
-                <img style={styles.img} src={item.image} alt={item.brand} />
-                <div style={styles.cardContent}>
-                  <h3 style={styles.brand}>{item.brand}</h3>
-                  
-                  <p style={styles.price}>${item.price}</p>
-                  <div style={styles.button}>View Details</div>
+                <div
+                  style={styles.card}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = styles.cardHover.transform;
+                    e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = styles.card.boxShadow;
+                  }}
+                >
+                  <img style={styles.img} src={item.image} alt={item.title} />
+                  <div style={styles.cardContent}>
+                    <h3 style={styles.brand}>{item.title}</h3>
+                    <p style={styles.price}>{item.author}</p>
+                    <p style={styles.price}>${item.price}</p>
+                    <div style={styles.button}>View Details</div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default ComputersPage;
+export default BookPage;

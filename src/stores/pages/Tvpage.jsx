@@ -2,9 +2,24 @@ import React, { useState } from 'react';
 import { tvsData } from '../data/tv';
 import Navbarr from '../components/Navbarr';
 import { Link } from 'react-router-dom';
+import FilterSidebar from '../../components/FilterSidebar';
 
 export const Tvpage = () => {
-  const [selectedProduct, setSelectedProduct] = useState([]);
+  const brandOptions = Array.from(new Set(tvsData.map(item => item.brand)));
+  const [selectedBrands, setSelectedBrands] = useState([]);
+
+  const filteredData = selectedBrands.length === 0
+    ? tvsData
+    : tvsData.filter(item => selectedBrands.includes(item.brand));
+
+  const handleBrandChange = (brand) => {
+    setSelectedBrands(prev =>
+      prev.includes(brand)
+        ? prev.filter(b => b !== brand)
+        : [...prev, brand]
+    );
+  };
+  const handleReset = () => setSelectedBrands([]);
 
   const styles = {
     container: {
@@ -29,11 +44,16 @@ export const Tvpage = () => {
       fontSize: '1.2rem',
       color: '#a8a8a8',
     },
+    layout: {
+      display: 'flex',
+      gap: '40px',
+    },
     grid: {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
       gap: '40px',
       padding: '0 20px',
+      flex: 1,
     },
     card: {
       background: 'linear-gradient(145deg, #1f2230, #171924)',
@@ -89,34 +109,41 @@ export const Tvpage = () => {
           <h2 style={styles.title}>Explore Top Electronics</h2>
           <p style={styles.subtitle}>Experience the future of entertainment today.</p>
         </div>
-
-        <div style={styles.grid}>
-          {tvsData.map((item) => (
-            <div
-              key={item.id}
-              style={styles.card}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = styles.cardHover.transform;
-                e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = styles.card.boxShadow;
-              }}
-            >
-              <img style={styles.img} src={item.image} alt={item.brand} />
-              <div style={styles.cardContent}>
-                <h3 style={styles.brand}>{item.brand}</h3>
-                <p style={styles.price}>${item.price}</p>
-                <Link
-                  to={`/Tvsss/${item.id}`}
-                  style={styles.button}
-                >
-                  View Details
-                </Link>
+        <div style={styles.layout}>
+          <FilterSidebar
+            options={brandOptions}
+            selectedOptions={selectedBrands}
+            onChange={handleBrandChange}
+            onReset={handleReset}
+          />
+          <div style={styles.grid}>
+            {filteredData.map((item) => (
+              <div
+                key={item.id}
+                style={styles.card}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = styles.cardHover.transform;
+                  e.currentTarget.style.boxShadow = styles.cardHover.boxShadow;
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = styles.card.boxShadow;
+                }}
+              >
+                <img style={styles.img} src={item.image} alt={item.brand} />
+                <div style={styles.cardContent}>
+                  <h3 style={styles.brand}>{item.brand}</h3>
+                  <p style={styles.price}>${item.price}</p>
+                  <Link
+                    to={`/Tvsss/${item.id}`}
+                    style={styles.button}
+                  >
+                    View Details
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </>
