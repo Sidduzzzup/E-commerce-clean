@@ -6,7 +6,7 @@ const RussianBanners = () => {
        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '60px', marginBottom: '0px' }}>
         
         <img
-          src="/public/actions_1731921905.jpeg"
+          src="/actions_1731921905.jpeg"
           alt="Japan Welcomes You"
           style={{
             width: '70%', // slightly wider for banner feel
@@ -20,7 +20,7 @@ const RussianBanners = () => {
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '30px' }}>
         <img
-          src="/public/actions_1742463707.jpg"
+          src="/actions_1742463707.jpg"
           alt="Japan Welcomes You"
           style={{
             width: '80%', // slightly wider for banner feel
