@@ -65,7 +65,7 @@
 .imgBox {
   flex: 0 0 auto;
   width: 200px; /* or any fixed width */
-  height: auto;
+  height: 200px;
 }
 
 .proImage {

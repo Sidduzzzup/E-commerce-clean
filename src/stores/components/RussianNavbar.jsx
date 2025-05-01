@@ -26,7 +26,7 @@ function RussianNavbar() {
   };
 
   return (<>
-    <Navbar expand="lg" className="russian-navbar">
+    <Navbar className="russian-navbar">
       <Container>
         <Navbar.Brand href="/">Сизонский базар</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -41,7 +41,7 @@ function RussianNavbar() {
             <NavDropdown title="Дополнительно" id="basic-nav-dropdown">
               <NavDropdown.Item href="#">Корейская версия</NavDropdown.Item>
               <NavDropdown.Item href="#">Японская эксклюзивная</NavDropdown.Item>
-              <NavDropdown.Divider />
+              <NavDropdown.Divider/>
               <NavDropdown.Item href="#">Получить купоны</NavDropdown.Item>
             </NavDropdown>
 

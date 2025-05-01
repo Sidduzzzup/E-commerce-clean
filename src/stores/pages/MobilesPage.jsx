@@ -139,7 +139,7 @@ export const MobilesPage = () => {
                   <img style={styles.img} src={item.image} alt={item.model} />
                   <div style={styles.cardContent}>
                     <h3 style={styles.brand}>{item.model}</h3>
-                    <p style={styles.price}>${item.price}</p>
+                    <p style={styles.price}>₹{item.price}</p>
                     <div style={styles.button}>View Details</div>
                   </div>
                 </div>

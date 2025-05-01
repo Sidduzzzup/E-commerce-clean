@@ -77,6 +77,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     padding: "20px",
+    
   },
   productImage: {
     width: "100%",

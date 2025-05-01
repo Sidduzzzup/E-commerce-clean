@@ -142,7 +142,7 @@ export const BookPage = () => {
                   <div style={styles.cardContent}>
                     <h3 style={styles.brand}>{item.title}</h3>
                     <p style={styles.price}>{item.author}</p>
-                    <p style={styles.price}>${item.price}</p>
+                    <p style={styles.price}>₹{item.price}</p>
                     <div style={styles.button}>View Details</div>
                   </div>
                 </div>
